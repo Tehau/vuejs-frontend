@@ -1,26 +1,43 @@
 <template>
     <main class="container">
-        <div class="bg-light p-5 rounded">
-            <ul>
-                <li v-for="recipe in recipes" :key="recipe.Name">
-                    {{recipe.Name}}
-                </li>
-            </ul>
-        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Status</th>
+            </tr>
+            </thead>
+            <tbody>
+<!--            <tr :src="listRecipes.recipes">-->
+            <tr v-for="character in RickAndMorty.results" :key="character.id"
+                v-on:click="killTargets(character)">
+                <th scope="row">{{character.id}}</th>
+                <td>{{character.name}}</td>
+                <td>{{character.status}}</td>
+            </tr>
+            </tbody>
+        </table>
     </main>
 </template>
 
 <script>
 
-    import recipesData from "../data/recipes.json";
+    import RickAndMorty from "../data/rickandmortycharacter.json";
 
     export default {
         // eslint-disable-next-line vue/multi-word-component-names
         name: "Recipe",
         data() {
             return {
-              recipes: recipesData
+                RickAndMorty,
             };
+        },
+        methods: {
+            killTargets(character) {
+                console.log('kill ' + character.name)
+                character.status = "Dead"
+            }
         }
     }
 </script>
