@@ -1,19 +1,17 @@
 <template>
     <Menu />
     <main>
-        <HomePage/>
+        <router-view/>
     </main>
 </template>
 
 <script>
-    import HomePage from './home/HomePage.vue'
     import Menu from "@/menu/Menu";
 
     export default {
         name: 'App',
         components: {
-            Menu,
-            HomePage
+            Menu
         }
     }
 </script>
@@ -36,4 +34,12 @@
         margin: 0 auto;
     }
 
+    .nav-link {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .foo {
+        color: red;
+    }
 </style>

@@ -2,16 +2,22 @@
     <header>
         <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">
-                    VueJS <img alt="Vue logo" src="../assets/logo.png" style="max-height: 30px">
-                </a>
+                <router-view to="/">
+                    <a class="navbar-brand">
+                        VueJS <img alt="Vue logo" src="../assets/logo.png" style="max-height: 30px">
+                    </a>
+                </router-view>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav me-auto mb-2 mb-md-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                            <router-link to="/" class="nav-link">
+                                Home
+                            </router-link>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Recipes</a>
+                            <router-link to="/recipes" class="nav-link">
+                                Recipes
+                            </router-link>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Add Recipes</a>
