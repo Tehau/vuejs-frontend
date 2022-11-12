@@ -1,6 +1,6 @@
 import {createRouter, createWebHashHistory} from "vue-router";
 import HomePage from "@/home/HomePage";
-import Recipe from "@/recipe/Recipe";
+import Recipe from "@/listcharacter/ListCharacter";
 
 
 export default createRouter({

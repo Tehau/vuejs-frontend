@@ -10,11 +10,11 @@
             </thead>
             <tbody>
 <!--            <tr :src="listRecipes.recipes">-->
-            <tr v-for="character in RickAndMorty.results" :key="character.id"
-                v-on:click="killTargets(character)">
-                <th scope="row">{{character.id}}</th>
+            <tr v-for="(character, index) in RickAndMorty.results" :key="index"
+                @click="killTargets(character)">
+                <th scope="row">{{index+1}}</th>
                 <td>{{character.name}}</td>
-                <td>{{character.status}}</td>
+                <td :style="deadPeople(character)">{{character.status}}</td>
             </tr>
             </tbody>
         </table>
@@ -23,20 +23,28 @@
 
 <script>
 
-    import RickAndMorty from "../data/rickandmortycharacter.json";
-
+    import RickAndMorty from "../assets/data/rickandmortycharacter.json";
     export default {
         // eslint-disable-next-line vue/multi-word-component-names
         name: "Recipe",
         data() {
             return {
                 RickAndMorty,
+                cart: []
             };
         },
         methods: {
             killTargets(character) {
-                console.log('kill ' + character.name)
-                character.status = "Dead"
+                console.log('kill ' + character.name);
+                character.status = "Dead";
+                this.cart.push(character.name)
+            },
+            deadPeople(character) {
+                return {
+                    color: character.status === "Dead"?
+                        'red':
+                        'green'
+                }
             }
         }
     }
