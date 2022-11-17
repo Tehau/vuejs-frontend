@@ -15,7 +15,7 @@
                             </router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link to="/recipes" class="nav-link">
+                            <router-link to="/characters" class="nav-link">
                                 Recipes
                             </router-link>
                         </li>

@@ -1,6 +1,7 @@
 import {createRouter, createWebHashHistory} from "vue-router";
 import HomePage from "@/home/HomePage";
-import Recipe from "@/listcharacter/ListCharacter";
+import ListCharacter from "@/listcharacter/ListCharacter";
+import Character from "@/character/Character";
 
 
 export default createRouter({
@@ -10,8 +11,13 @@ export default createRouter({
         name: 'Home',
         component: HomePage,
     },{
-        path: '/recipes',
-        name: 'Recipes',
-        component: Recipe,
+        path: '/characters',
+        name: 'ListCharacter',
+        component: ListCharacter,
+    },{
+        path: '/characters/:id',
+        name: 'Character',
+        component: Character,
+        props: true,
     }]
 });
