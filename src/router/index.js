@@ -2,6 +2,8 @@ import {createRouter, createWebHashHistory} from "vue-router";
 import HomePage from "@/home/HomePage";
 import ListCharacter from "@/listcharacter/ListCharacter";
 import Character from "@/character/Character";
+import SideBarHome from "@/sidebar/SideBarHome";
+import SideBarCharacterList from "@/sidebar/SideBarCharacterList";
 
 
 export default createRouter({
@@ -9,11 +11,17 @@ export default createRouter({
     routes: [{
         path: '/',
         name: 'Home',
-        component: HomePage,
+        components: {
+            default: HomePage,
+            title: SideBarHome
+        },
     },{
         path: '/characters',
         name: 'ListCharacter',
-        component: ListCharacter,
+        components: {
+            default: ListCharacter,
+            title: SideBarCharacterList
+        },
     },{
         path: '/characters/:id',
         name: 'Character',
