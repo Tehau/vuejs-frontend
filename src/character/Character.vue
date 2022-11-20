@@ -1,11 +1,15 @@
 <template>
   <div class="flex-items">
     <div class="char-container">
-      <div class="photo char-items">
-        <img :src="char.data.image"/>
-      </div>
+      <router-link :to="{ name: 'CharacterDetail', params: { id: char.data.id }}">
+        <div class="photo char-items">
+          <img :src="char.data.image"/>
+        </div>
+      </router-link>
       <div class="char-items">
-        <div><h4>{{ this.data.name }}</h4></div>
+        <div @click="killTarget()">
+          <h4>{{ this.data.name }}</h4>
+        </div>
         <div>
           <span :style="deadPeople()">
             <font-awesome-icon icon="fa-solid fa-circle-dot"/>
@@ -41,15 +45,15 @@ export default {
     }
   },
   methods: {
-    goDetail(character) {
-      this.$router.push({
-        name: 'Character',
-        params: {
-          id: character.id,
-          data: character
-        }
-      });
-    },
+    // goDetail(character) {
+    //   this.$router.push({
+    //     name: 'Character',
+    //     params: {
+    //       id: character.id,
+    //       data: character
+    //     }
+    //   });
+    // },
     deadPeople() {
       if (this.data.status === "Dead") return 'color:red'
       if (this.data.status === "Alive") return 'color:green'
@@ -57,6 +61,17 @@ export default {
       // color: this.data.status === "Dead" ?
       //     'red' :
       //     'green'
+    },
+    killTarget() {
+      console.log('kill ' + this.data.name);
+      // eslint-disable-next-line vue/no-mutating-props
+      if (this.data.status === "Dead") this.data.status = "Alive"
+      // eslint-disable-next-line vue/no-mutating-props
+      else if (this.data.status === "Alive") this.data.status = "Dead"
+
+      this.$emit('killed', this.data.image)
+      // this.cart.push(character.name)
+      // this.$router.push({name: 'Character', params: {id: character.id, data: character}});
     }
   }
 }

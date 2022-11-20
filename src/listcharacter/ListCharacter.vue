@@ -1,30 +1,11 @@
 <template>
+<!--  {{this.cart}}-->
+  <img :src="lastTarget"/>
   <main class="flex-container">
-    <router-view></router-view>
     <div v-for="(character, index) in RickAndMorty.results" :key="index">
-    <character :id="character.id" :data="character"></character>
+      <character :id="character.id" :data="character"
+                 @killed="onClickChild"></character>
     </div>
-<!--    <table class="table">-->
-<!--      <thead>-->
-<!--      <tr>-->
-<!--        <th scope="col">#</th>-->
-<!--        <th scope="col">Name</th>-->
-<!--        <th scope="col">Status</th>-->
-<!--      </tr>-->
-<!--      </thead>-->
-<!--      <tbody>-->
-<!--      <tr v-for="(character, index) in RickAndMorty.results" :key="index">-->
-<!--        <th scope="row">{{ index + 1 }}</th>-->
-<!--&lt;!&ndash;        <td @click="goDetail(character)">&ndash;&gt;-->
-<!--        <td>-->
-<!--          <router-link :to="{ name: 'Character', params: { id: character.id }}">-->
-<!--            {{ character.name }}-->
-<!--          </router-link>-->
-<!--        </td>-->
-<!--        <td :style="deadPeople(character)" @click="killTarget(character)">{{ character.status }}</td>-->
-<!--      </tr>-->
-<!--      </tbody>-->
-<!--    </table>-->
   </main>
 </template>
 
@@ -38,33 +19,17 @@ export default {
   name: "ListCharacter",
   components: {Character},
   data() {
+    let lastTarget = '';
     return {
       RickAndMorty,
+      lastTarget,
       cart: []
     };
   },
   methods: {
-    killTarget(character) {
-      // console.log('kill ' + character.name);
-      character.status = "Dead";
-      this.cart.push(character.name)
-      // this.$router.push({name: 'Character', params: {id: character.id, data: character}});
-    },
-    goDetail(character) {
-      this.$router.push({
-        name: 'Character',
-        params: {
-          id: character.id,
-          data: character
-        }
-      });
-    },
-    deadPeople(character) {
-      return {
-        color: character.status === "Dead" ?
-            'red' :
-            'green'
-      }
+    onClickChild (value) {
+      this.lastTarget=value
+      this.cart.push(value)
     }
   }
 }
