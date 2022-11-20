@@ -16,11 +16,11 @@
             </li>
             <li class="nav-item">
               <router-link to="/characters" class="nav-link">
-                Recipes
+                Characters
               </router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Add Recipes</a>
+              <a class="nav-link" href="#">Add character</a>
             </li>
           </ul>
           <form class="d-flex" role="search">

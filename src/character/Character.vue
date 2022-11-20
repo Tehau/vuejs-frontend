@@ -1,24 +1,24 @@
 <template>
-  <div>{{ char.id }}</div>
+  <div>{{ char }}</div>
 </template>
 
 <script>
+
 export default {
+
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Character",
   props: {
-    id: {
-      type: [Number, String],
-      validator(value) {
-        return Number.isInteger(Number(value));
-      }
-    }
+    data: { type: Object },
+    id: { type: Number }
   },
   computed: {
     char() {
-      const {id} = this;
+      const {id, data} = this;
+      console.log(this.id)
       return {
-        id: id
+        id: id,
+        data: data
       }
     }
   }

@@ -1,5 +1,6 @@
 <template>
   <main class="container">
+    <router-view></router-view>
     <table class="table">
       <thead>
       <tr>
@@ -9,14 +10,15 @@
       </tr>
       </thead>
       <tbody>
-      <!--            <tr :src="listRecipes.recipes">-->
-      <tr v-for="(character, index) in RickAndMorty.results" :key="index"
-          @click="killTargets(character)">
+      <tr v-for="(character, index) in RickAndMorty.results" :key="index">
         <th scope="row">{{ index + 1 }}</th>
+<!--        <td @click="goDetail(character)">-->
         <td>
-          {{ character.name }}
+          <router-link :to="{ name: 'Character', params: { id: character.id }}">
+            {{ character.name }}
+          </router-link>
         </td>
-        <td :style="deadPeople(character)">{{ character.status }}</td>
+        <td :style="deadPeople(character)" @click="killTarget(character)">{{ character.status }}</td>
       </tr>
       </tbody>
     </table>
@@ -37,11 +39,20 @@ export default {
     };
   },
   methods: {
-    killTargets(character) {
-      // console.log('kill ' + character.name);
-      // character.status = "Dead";
-      // this.cart.push(character.name)
-      this.$router.push({name: 'Character', params: {id: character.id}});
+    killTarget(character) {
+      console.log('kill ' + character.name);
+      character.status = "Dead";
+      this.cart.push(character.name)
+      // this.$router.push({name: 'Character', params: {id: character.id, data: character}});
+    },
+    goDetail(character) {
+      this.$router.push({
+        name: 'Character',
+        params: {
+          id: character.id,
+          data: character
+        }
+      });
     },
     deadPeople(character) {
       return {
