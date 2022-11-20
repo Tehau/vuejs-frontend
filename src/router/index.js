@@ -22,16 +22,13 @@ export default createRouter({
             default: ListCharacter,
             title: SideBarCharacterList
         },
-        children: [
-            {
-                path: ':id',
-                name: 'Character',
-                components: {
-                    default: Character,
-                    title: SideBarCharacterList
-                },
-                props: true,
-            }
-        ]
+    },{
+        path: '/characters/:id',
+        name: 'Character',
+        components: {
+            default: Character,
+            title: SideBarCharacterList
+        },
+        props: true,
     }]
 });
