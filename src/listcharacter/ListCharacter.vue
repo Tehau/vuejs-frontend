@@ -1,6 +1,6 @@
 <template>
 <!--  {{this.cart}}-->
-  <img :src="lastTarget"/>
+  <img v-for="(image_src, index) in cart" :key="index" :src="image_src"/>
   <main class="flex-container">
     <div v-for="(character, index) in RickAndMorty.results" :key="index">
       <character :id="character.id" :data="character"
@@ -18,25 +18,26 @@ export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "ListCharacter",
   components: {Character},
+  computed: {
+    cart() {
+      return this.$store.state.cart;
+    }
+  },
   data() {
-    let lastTarget = '';
     return {
-      RickAndMorty,
-      lastTarget,
-      cart: []
+      RickAndMorty
     };
   },
   methods: {
     onClickChild (value) {
-      this.lastTarget=value
-      this.cart.push(value)
+      // this.cart.push(value)
+      this.$store.commit('addCharImageToCart', value)
     }
   }
 }
 </script>
 
 <style>
-
 .flex-container {
   display: flex;
   flex-direction: row;
@@ -48,5 +49,14 @@ export default {
   /*demo*/
   /*box-shadow: 0 0 0 1px black;*/
   margin-bottom: 10px;
+}
+</style>
+
+<style scoped>
+img {
+  position: relative;
+  right: 10px;
+  width: 50px;
+  z-index: 5;
 }
 </style>
