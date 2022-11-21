@@ -1,21 +1,16 @@
 <template>
-  <div>{{ character.id }}</div>
+  <div v-if="character">{{ this.character }}</div>
 </template>
 
 <script>
 export default {
   name: "CharacterDetail",
   props: {
-    data: {type: Object},
-    id: {type: Number}
+    id: {type: String}
   },
   computed: {
     character() {
-      const {id, data} = this;
-      return {
-        id: id,
-        data: data
-      }
+      return this.$store.state.character
     }
   },
 }

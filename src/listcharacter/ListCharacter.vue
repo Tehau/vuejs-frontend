@@ -1,8 +1,8 @@
 <template>
 <!--  {{this.cart}}-->
   <img v-for="(image_src, index) in cart" :key="index" :src="image_src"/>
-  <main class="flex-container">
-    <div v-for="(character, index) in RickAndMorty.results" :key="index">
+  <main v-if="availableChars" class="flex-container">
+    <div v-for="(character, index) in availableChars.results" :key="index">
       <character :id="character.id" :data="character"
                  @killed="onClickChild"></character>
     </div>
@@ -11,26 +11,29 @@
 
 <script>
 
-import RickAndMorty from "../assets/data/rickandmortycharacter.json";
+// import RickAndMorty from "../assets/data/rickandmortycharacter.json";
 import Character from "@/character/Character";
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "ListCharacter",
+  created() {
+    this.$store.dispatch('getCharacters')
+  },
   components: {Character},
   computed: {
+    availableChars() {
+      return this.$store.state.characterList
+    },
     cart() {
       return this.$store.state.cart;
     }
   },
   data() {
-    return {
-      RickAndMorty
-    };
+    return this.$store.state.characterList;
   },
   methods: {
     onClickChild (value) {
-      // this.cart.push(value)
       this.$store.commit('addCharImageToCart', value)
     }
   }

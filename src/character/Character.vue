@@ -1,11 +1,11 @@
 <template>
   <div class="flex-items">
     <div class="char-container">
-      <router-link :to="{ name: 'CharacterDetail', params: { id: char.data.id }}">
-        <div class="photo char-items">
+<!--      <router-link :to="{ name: 'CharacterDetail', params: { id: char.data.id }}">-->
+        <div class="photo char-items" @click="goDetail(char)">
           <img :src="char.data.image"/>
         </div>
-      </router-link>
+<!--      </router-link>-->
       <div class="char-items">
         <div @click="killTarget()">
           <h4>{{ this.data.name }}</h4>
@@ -45,15 +45,15 @@ export default {
     }
   },
   methods: {
-    // goDetail(character) {
-    //   this.$router.push({
-    //     name: 'Character',
-    //     params: {
-    //       id: character.id,
-    //       data: character
-    //     }
-    //   });
-    // },
+    async goDetail(character) {
+      await this.$store.dispatch('getDetailCharacter', character.id)
+      this.$router.push({
+        name: 'CharacterDetail',
+        params: {
+          id: character.id
+        }
+      });
+    },
     deadPeople() {
       if (this.data.status === "Dead") return 'color:red'
       if (this.data.status === "Alive") return 'color:green'
