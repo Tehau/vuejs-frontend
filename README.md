@@ -1,5 +1,7 @@
 # vuejs-frontend
 
+## VueJS install
+
 ## Project setup
 ```
 yarn install

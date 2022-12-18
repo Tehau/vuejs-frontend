@@ -2,7 +2,8 @@
 <!--  {{this.cart}}-->
   <img v-for="(image_src, index) in cart" :key="index" :src="image_src"/>
   <main v-if="availableChars" class="flex-container">
-    <div v-for="(character, index) in availableChars.results" :key="index">
+    <div v-for="(character, index) in availableChars" :key="index">
+<!--    <div v-for="(character, index) in availableChars.results" :key="index">-->
       <character :id="character.id" :data="character"
                  @killed="onClickChild"></character>
     </div>

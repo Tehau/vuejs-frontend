@@ -58,20 +58,11 @@ export default {
       if (this.data.status === "Dead") return 'color:red'
       if (this.data.status === "Alive") return 'color:green'
       return 'color:grey'
-      // color: this.data.status === "Dead" ?
-      //     'red' :
-      //     'green'
     },
     killTarget() {
-      console.log('kill ' + this.data.name);
       // eslint-disable-next-line vue/no-mutating-props
-      if (this.data.status === "Dead") this.data.status = "Alive"
-      // eslint-disable-next-line vue/no-mutating-props
-      else if (this.data.status === "Alive") this.data.status = "Dead"
-
-      this.$emit('killed', this.data.image)
-      // this.cart.push(character.name)
-      // this.$router.push({name: 'Character', params: {id: character.id, data: character}});
+      this.data.status = "Dead"
+      this.$store.dispatch('postCharacter', this.data)
     }
   }
 }
