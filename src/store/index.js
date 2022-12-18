@@ -23,7 +23,7 @@ export default createStore({
     actions: {
         // eslint-disable-next-line no-unused-vars
         getCharacters(context) {
-            axios.get('https://rickandmortyapi.com/api/character')
+            axios.get('https://rickandmortyapi.com/api/character?page=41')
                 .then((result) => context.commit('getAllChar',result.data))
                 .catch(console.error);
         },
